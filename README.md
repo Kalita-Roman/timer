@@ -1,18 +1,28 @@
 # Timer
 
-A simple Node.js server built with Express.js that provides a REST API for managing timers with in-memory storage.
+A Node.js server with Google OAuth2 authentication built with Express.js and Passport.js that provides a REST API for managing timers with in-memory storage.
 
 ## Features
 
-- **Hello World endpoint**: Basic root endpoint
+- **Google OAuth2 Authentication**: Secure login with Google accounts
 - **Timer CRUD API**: Full Create, Read, Update, Delete operations for timers
 - **In-memory storage**: Timers are stored in memory during application runtime
+- **Session management**: Secure session handling with express-session
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js (version 14 or higher)
 - npm
+- Google Cloud Platform project with OAuth2 credentials
+
+### Google Cloud Platform Setup
+
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable the Google+ API
+3. Create OAuth2 credentials:
+   - **Authorized JavaScript origins**: `http://localhost:3000`
+   - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
 
 ### Installation
 
@@ -20,6 +30,16 @@ A simple Node.js server built with Express.js that provides a REST API for manag
 2. Install dependencies:
    ```bash
    npm install
+   ```
+3. Copy the environment template:
+   ```bash
+   cp .env.example .env
+   ```
+4. Update `.env` with your Google OAuth2 credentials:
+   ```
+   GOOGLE_CLIENT_ID=your_google_client_id_here
+   GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+   SESSION_SECRET=your_random_session_secret_here
    ```
 
 ### Running the Server
@@ -29,12 +49,30 @@ To start the server, run:
 npm start
 ```
 
-The server will start on `http://localhost:3000/`
+The server will start on `http://localhost:3000/` and provide Google OAuth2 authentication.
+
+### Usage
+
+1. Navigate to `http://localhost:3000/`
+2. Click "Login with Google" to authenticate
+3. After successful authentication, you'll see your profile information
+4. Use the logout link to sign out
+
+### Environment Variables
+
+- `GOOGLE_CLIENT_ID`: Your Google OAuth2 client ID
+- `GOOGLE_CLIENT_SECRET`: Your Google OAuth2 client secret  
+- `SESSION_SECRET`: Secret key for session encryption
+- `PORT`: Server port (defaults to 3000)
 
 ## API Endpoints
 
-### Root Endpoint
-- **GET** `/` - Returns "Hello, World!"
+### Authentication Routes
+- **GET** `/` - Main page (shows login or user profile)
+- **GET** `/auth/login` - Login page
+- **GET** `/auth/logout` - Logout and redirect to main page
+- **GET** `/auth/google` - Initiate Google OAuth flow
+- **GET** `/auth/google/callback` - Google OAuth callback handler
 
 ### Timer API
 All timer API endpoints use JSON format and return standardized responses with `success`, `data`, and optional `error` fields.
@@ -139,12 +177,9 @@ curl -X PUT -H "Content-Type: application/json" \
 curl -X DELETE http://localhost:3000/api/timers/1
 ```
 
-### Testing the Root Endpoint
+### Testing Authentication
 
-You can test the original endpoint by opening your browser to `http://localhost:3000/` or using curl:
-```bash
-curl http://localhost:3000/
-```
+You can test the authentication by opening your browser to `http://localhost:3000/` and following the OAuth flow.
 
 ## GitHub Copilot Instructions
 
@@ -154,3 +189,4 @@ This project includes GitHub Copilot instruction files to help with AI-assisted 
 - **`.copilotrc.md`** - Project-specific configuration and preferences for Copilot suggestions
 
 These files help ensure consistent and appropriate code suggestions when using GitHub Copilot with this project.
+
