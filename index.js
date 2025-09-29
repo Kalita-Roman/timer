@@ -1,5 +1,5 @@
 const express = require('express');
-const timerController = require('./controllers/timerController');
+const timerRoutes = require('./routes/timers');
 
 const app = express();
 const port = 3000;
@@ -13,11 +13,7 @@ app.get('/', (req, res) => {
 });
 
 // Timer API routes
-app.get('/api/timers', timerController.getAllTimers.bind(timerController));
-app.get('/api/timers/:id', timerController.getTimerById.bind(timerController));
-app.post('/api/timers', timerController.createTimer.bind(timerController));
-app.put('/api/timers/:id', timerController.updateTimer.bind(timerController));
-app.delete('/api/timers/:id', timerController.deleteTimer.bind(timerController));
+app.use('/api/timers', timerRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
