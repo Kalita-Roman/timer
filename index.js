@@ -7,6 +7,14 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Build callback URL for GitHub Codespaces
+const getCallbackURL = () => {
+  if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
+    return `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/auth/google/callback`;
+  }
+  return process.env.CALLBACK_URL || `http://localhost:${port}/auth/google/callback`;
+};
+
 // Session configuration
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default-secret-key',
@@ -23,7 +31,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: getCallbackURL()
 }, (accessToken, refreshToken, profile, done) => {
   return done(null, profile);
 }));
