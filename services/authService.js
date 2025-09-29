@@ -7,7 +7,7 @@ class AuthService {
     if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
       return `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/auth/google/callback`;
     }
-    return process.env.CALLBACK_URL || `/auth/google/callback`;
+    return process.env.CALLBACK_URL || `https://timer-1001023352343.europe-central2.run.app/auth/google/callback`;
   }
 
   setupGoogleStrategy() {
