@@ -1,5 +1,5 @@
-const express = require('express');
-const timerController = require('../controllers/timerController');
+import express from 'express';
+import timerController from '../controllers/timerController.js';
 
 const router = express.Router();
 
@@ -10,4 +10,4 @@ router.post('/', timerController.createTimer.bind(timerController));
 router.put('/:id', timerController.updateTimer.bind(timerController));
 router.delete('/:id', timerController.deleteTimer.bind(timerController));
 
-module.exports = router;
+export default router;

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Simple Hello, World! NodeJS server built with Express.js",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"No tests specified - skipping test step\" && exit 0"

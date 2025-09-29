@@ -1,8 +1,14 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import authService from '../services/authService.js';
+import { logout } from '../middleware/auth.js';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const router = express.Router();
-const authService = require('../services/authService');
-const { logout } = require('../middleware/auth');
 
 // Login page
 router.get('/login', (req, res) => {
@@ -22,4 +28,4 @@ router.get('/google/callback',
   }
 );
 
-module.exports = router;
+export default router;

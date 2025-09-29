@@ -1,4 +1,4 @@
-const timerService = require('../services/timerService');
+import timerService from '../services/timerService.js';
 
 /**
  * Timer Controller - Handles HTTP requests for timer CRUD operations
@@ -155,4 +155,4 @@ class TimerController {
   }
 }
 
-module.exports = new TimerController();
+export default new TimerController();
