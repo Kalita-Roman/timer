@@ -1,7 +1,7 @@
 {
   "name": "timer",
   "version": "1.0.0",
-  "description": "Simple Hello, World! NodeJS server",
+  "description": "Simple Hello, World! NodeJS server built with Express.js",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,5 +9,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

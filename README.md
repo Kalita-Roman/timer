@@ -1,6 +1,6 @@
 # Timer
 
-A simple "Hello, World!" Node.js server.
+A simple "Hello, World!" Node.js server built with Express.js.
 
 ## Getting Started
 
@@ -23,11 +23,11 @@ To start the server, run:
 npm start
 ```
 
-The server will start on `http://127.0.0.1:3000/` and respond with "Hello, World!" to all requests.
+The server will start on `http://localhost:3000/` and respond with "Hello, World!" to all requests.
 
 ### Testing
 
-You can test the server by opening your browser to `http://127.0.0.1:3000/` or using curl:
+You can test the server by opening your browser to `http://localhost:3000/` or using curl:
 ```bash
-curl http://127.0.0.1:3000/
+curl http://localhost:3000/
 ```
