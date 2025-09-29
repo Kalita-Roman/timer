@@ -67,6 +67,6 @@ app.use('/auth', authRoutes);
 // Timer API routes (protected)
 app.use('/api/timers', ensureAuthenticated, timerRoutes);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
