@@ -2,11 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const authService = require('./services/authService');
-const routes = require('./routes/index');
+const authRoutes = require('./routes/index');
 const timerRoutes = require('./routes/timers');
+const { isAuthenticated } = require('./middleware/auth');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.json());
 
 // Session configuration
 app.use(session({
@@ -19,16 +23,24 @@ app.use(session({
 // Initialize authentication service
 authService.initializePassport(app);
 
-// Use routes
-app.use('/', routes);
-
-// Middleware
-app.use(express.json());
-
-// Root route
+// Main route - moved back from routes/index.js
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  if (isAuthenticated(req)) {
+    res.send(`
+      <h1>Welcome, ${req.user.displayName}!</h1>
+      <p>Email: ${req.user.emails[0].value}</p>
+      <a href="/auth/logout">Logout</a>
+    `);
+  } else {
+    res.send(`
+      <h1>Timer Application</h1>
+      <p>Please <a href="/auth/login">login with Google</a> to continue.</p>
+    `);
+  }
 });
+
+// Auth routes with /auth prefix
+app.use('/auth', authRoutes);
 
 // Timer API routes
 app.use('/api/timers', timerRoutes);

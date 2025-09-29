@@ -1,13 +1,13 @@
 # Timer
 
-A Node.js server with Google OAuth2 authentication built with Express.js and Passport.js.
-A simple Node.js server built with Express.js that provides a REST API for managing timers with in-memory storage.
+A Node.js server with Google OAuth2 authentication built with Express.js and Passport.js that provides a REST API for managing timers with in-memory storage.
 
 ## Features
 
-- **Hello World endpoint**: Basic root endpoint
+- **Google OAuth2 Authentication**: Secure login with Google accounts
 - **Timer CRUD API**: Full Create, Read, Update, Delete operations for timers
 - **In-memory storage**: Timers are stored in memory during application runtime
+- **Session management**: Secure session handling with express-session
 
 ## Getting Started
 
@@ -65,12 +65,14 @@ The server will start on `http://localhost:3000/` and provide Google OAuth2 auth
 - `SESSION_SECRET`: Secret key for session encryption
 - `PORT`: Server port (defaults to 3000)
 
-The server will start on `http://localhost:3000/`
-
 ## API Endpoints
 
-### Root Endpoint
-- **GET** `/` - Returns "Hello, World!"
+### Authentication Routes
+- **GET** `/` - Main page (shows login or user profile)
+- **GET** `/auth/login` - Login page
+- **GET** `/auth/logout` - Logout and redirect to main page
+- **GET** `/auth/google` - Initiate Google OAuth flow
+- **GET** `/auth/google/callback` - Google OAuth callback handler
 
 ### Timer API
 All timer API endpoints use JSON format and return standardized responses with `success`, `data`, and optional `error` fields.
@@ -175,12 +177,9 @@ curl -X PUT -H "Content-Type: application/json" \
 curl -X DELETE http://localhost:3000/api/timers/1
 ```
 
-### Testing the Root Endpoint
+### Testing Authentication
 
-You can test the original endpoint by opening your browser to `http://localhost:3000/` or using curl:
-```bash
-curl http://localhost:3000/
-```
+You can test the authentication by opening your browser to `http://localhost:3000/` and following the OAuth flow.
 
 ## GitHub Copilot Instructions
 
