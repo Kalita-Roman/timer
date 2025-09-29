@@ -31,3 +31,12 @@ You can test the server by opening your browser to `http://localhost:3000/` or u
 ```bash
 curl http://localhost:3000/
 ```
+
+## GitHub Copilot Instructions
+
+This project includes GitHub Copilot instruction files to help with AI-assisted development:
+
+- **`.github/copilot-instructions.md`** - General project guidelines and coding standards for Copilot
+- **`.copilotrc.md`** - Project-specific configuration and preferences for Copilot suggestions
+
+These files help ensure consistent and appropriate code suggestions when using GitHub Copilot with this project.
