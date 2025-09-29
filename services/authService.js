@@ -2,10 +2,6 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 class AuthService {
-  constructor() {
-    // Don't initialize immediately - wait for explicit call
-  }
-
   // Build callback URL for GitHub Codespaces and other environments
   getCallbackURL(port = 3030) {
     if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
