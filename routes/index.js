@@ -1,14 +1,12 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const authService = require('../services/authService');
 const { logout } = require('../middleware/auth');
 
 // Login page
 router.get('/login', (req, res) => {
-  res.send(`
-    <h1>Login</h1>
-    <a href="/auth/google">Login with Google</a>
-  `);
+  res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
 // Logout route

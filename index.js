@@ -5,7 +5,7 @@ const session = require('express-session');
 const authService = require('./services/authService');
 const authRoutes = require('./routes/index');
 const timerRoutes = require('./routes/timers');
-const { isAuthenticated } = require('./middleware/auth');
+const { isAuthenticated, ensureAuthenticated } = require('./middleware/auth');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,17 +23,49 @@ app.use(session({
 // Initialize authentication service
 authService.initializePassport(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
-// Root route - serve the timer management page
+// Serve static files except index.html
+app.use(express.static(path.join(__dirname, 'public'), {
+  index: false // Don't serve index.html automatically
+}));
+
+// Root route - serve the timer management page (protected)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  // Check if user is authenticated
+  if (!req.isAuthenticated()) {
+    return res.redirect('/auth/login');
+  }
+  
+  // Read the HTML file and inject user data
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  const fs = require('fs');
+  
+  fs.readFile(indexPath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Error loading page');
+    }
+    
+    // Inject user data into the page
+    const userInfo = {
+      name: req.user.displayName || req.user.name || 'User',
+      email: req.user.emails ? req.user.emails[0].value : '',
+      picture: req.user.photos ? req.user.photos[0].value : ''
+    };
+    
+    // Replace placeholder with user data
+    const htmlWithUserData = data.replace(
+      '<script src="script.js"></script>',
+      `<script>window.userInfo = ${JSON.stringify(userInfo)};</script><script src="script.js"></script>`
+    );
+    
+    res.send(htmlWithUserData);
+  });
 });
 
 // Auth routes with /auth prefix
 app.use('/auth', authRoutes);
 
-// Timer API routes
-app.use('/api/timers', timerRoutes);
+// Timer API routes (protected)
+app.use('/api/timers', ensureAuthenticated, timerRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);

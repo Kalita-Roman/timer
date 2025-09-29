@@ -9,8 +9,22 @@
 <body>
     <div class="container">
         <header>
-            <h1>Timer Management</h1>
-            <p>Manage your timers with full CRUD operations</p>
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>Timer Management</h1>
+                    <p>Manage your timers with full CRUD operations</p>
+                </div>
+                <div class="user-info" id="user-info" style="display: none;">
+                    <div class="user-avatar">
+                        <img id="user-picture" src="" alt="User Avatar" onerror="this.style.display='none'">
+                        <span id="user-initials"></span>
+                    </div>
+                    <div class="user-details">
+                        <span id="user-name"></span>
+                        <a href="/auth/logout" class="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <main>

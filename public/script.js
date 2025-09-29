@@ -278,4 +278,36 @@ let timerManager;
 
 document.addEventListener('DOMContentLoaded', () => {
     timerManager = new TimerManager();
+    
+    // Display user information if available
+    if (window.userInfo) {
+        displayUserInfo(window.userInfo);
+    }
 });
+
+// Display user information in the header
+function displayUserInfo(userInfo) {
+    const userInfoElement = document.getElementById('user-info');
+    const userPicture = document.getElementById('user-picture');
+    const userInitials = document.getElementById('user-initials');
+    const userName = document.getElementById('user-name');
+    
+    if (userInfo.name) {
+        userName.textContent = userInfo.name;
+        
+        // Set user picture if available
+        if (userInfo.picture) {
+            userPicture.src = userInfo.picture;
+            userPicture.style.display = 'block';
+            userInitials.style.display = 'none';
+        } else {
+            // Show initials if no picture
+            const initials = userInfo.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            userInitials.textContent = initials;
+            userInitials.style.display = 'block';
+            userPicture.style.display = 'none';
+        }
+        
+        userInfoElement.style.display = 'flex';
+    }
+}
