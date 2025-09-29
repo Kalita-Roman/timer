@@ -21,8 +21,8 @@ A Node.js server with Google OAuth2 authentication built with Express.js and Pas
 1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
 2. Enable the Google+ API
 3. Create OAuth2 credentials:
-   - **Authorized JavaScript origins**: `http://localhost:3000`
-   - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
+   - **Authorized JavaScript origins**: `http://localhost:3030`
+   - **Authorized redirect URIs**: `http://localhost:3030/auth/google/callback`
 
 ### Installation
 
@@ -49,11 +49,11 @@ To start the server, run:
 npm start
 ```
 
-The server will start on `http://localhost:3000/` and provide Google OAuth2 authentication.
+The server will start on `http://localhost:3030/` and provide Google OAuth2 authentication.
 
 ### Usage
 
-1. Navigate to `http://localhost:3000/`
+1. Navigate to `http://localhost:3030/`
 2. Click "Login with Google" to authenticate
 3. After successful authentication, you'll see your profile information
 4. Use the logout link to sign out
@@ -63,7 +63,7 @@ The server will start on `http://localhost:3000/` and provide Google OAuth2 auth
 - `GOOGLE_CLIENT_ID`: Your Google OAuth2 client ID
 - `GOOGLE_CLIENT_SECRET`: Your Google OAuth2 client secret  
 - `SESSION_SECRET`: Secret key for session encryption
-- `PORT`: Server port (defaults to 3000)
+- `PORT`: Server port (defaults to 3030)
 
 ## API Endpoints
 
@@ -158,28 +158,28 @@ Request body (all fields optional):
 
 ```bash
 # Get all timers
-curl http://localhost:3000/api/timers
+curl http://localhost:3030/api/timers
 
 # Create a timer
 curl -X POST -H "Content-Type: application/json" \
   -d '{"name":"Work Timer","duration":1500}' \
-  http://localhost:3000/api/timers
+  http://localhost:3030/api/timers
 
 # Get timer by ID
-curl http://localhost:3000/api/timers/1
+curl http://localhost:3030/api/timers/1
 
 # Update timer
 curl -X PUT -H "Content-Type: application/json" \
   -d '{"status":"running"}' \
-  http://localhost:3000/api/timers/1
+  http://localhost:3030/api/timers/1
 
 # Delete timer
-curl -X DELETE http://localhost:3000/api/timers/1
+curl -X DELETE http://localhost:3030/api/timers/1
 ```
 
 ### Testing Authentication
 
-You can test the authentication by opening your browser to `http://localhost:3000/` and following the OAuth flow.
+You can test the authentication by opening your browser to `http://localhost:3030/` and following the OAuth flow.
 
 ## GitHub Copilot Instructions
 

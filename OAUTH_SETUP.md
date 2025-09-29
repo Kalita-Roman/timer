@@ -6,7 +6,7 @@ When setting up OAuth2 credentials in the Google Cloud Console, use the followin
 
 ### Authorized JavaScript Origins
 ```
-http://localhost:3000
+http://localhost:3030
 ```
 
 For production, add your production domain:
@@ -16,7 +16,7 @@ https://your-production-domain.com
 
 ### Authorized Redirect URIs
 ```
-http://localhost:3000/auth/google/callback
+http://localhost:3030/auth/google/callback
 ```
 
 For production, add your production callback URL:
@@ -43,7 +43,7 @@ Set these environment variables in your `.env` file:
 GOOGLE_CLIENT_ID=your_google_client_id_here
 GOOGLE_CLIENT_SECRET=your_google_client_secret_here
 SESSION_SECRET=your_random_session_secret_here
-PORT=3000
+PORT=3030
 ```
 
 ## Security Notes

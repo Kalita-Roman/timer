@@ -7,7 +7,7 @@ class AuthService {
   }
 
   // Build callback URL for GitHub Codespaces and other environments
-  getCallbackURL(port = 3000) {
+  getCallbackURL(port = 3030) {
     if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
       return `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/auth/google/callback`;
     }
@@ -15,7 +15,7 @@ class AuthService {
   }
 
   setupGoogleStrategy() {
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3030;
     
     passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,

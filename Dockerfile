@@ -25,7 +25,7 @@ RUN chown -R nestjs:nodejs /app
 USER nestjs
 
 # Expose port (Cloud Run will provide PORT env var)
-EXPOSE 3000
+EXPOSE 3030
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]

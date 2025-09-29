@@ -26,7 +26,7 @@ timer/
 ```
 
 ## Development Guidelines
-1. **Server Configuration**: The server runs on port 3000 by default
+1. **Server Configuration**: The server runs on port 3030 by default
 2. **Route Handling**: All routes should follow RESTful conventions
 3. **Error Handling**: Implement proper error handling for all routes
 4. **Testing**: When adding tests, use a simple testing framework like Jest or Mocha

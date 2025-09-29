@@ -46,7 +46,7 @@ jobs:
             --platform managed \
             --region europe-central2 \
             --allow-unauthenticated \
-            --port 3000 \
+            --port 3030 \
             --cpu 1 \
             --memory 512Mi \
             --timeout 300 \
