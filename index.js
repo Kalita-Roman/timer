@@ -1,11 +1,17 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const session = require('express-session');
-const authService = require('./services/authService');
-const authRoutes = require('./routes/index');
-const timerRoutes = require('./routes/timers');
-const { isAuthenticated, ensureAuthenticated } = require('./middleware/auth');
+import 'dotenv/config';
+import express from 'express';
+import path from 'path';
+import session from 'express-session';
+import authService from './services/authService.js';
+import authRoutes from './routes/index.js';
+import timerRoutes from './routes/timers.js';
+import { isAuthenticated, ensureAuthenticated } from './middleware/auth.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,7 +43,6 @@ app.get('/', (req, res) => {
   
   // Read the HTML file and inject user data
   const indexPath = path.join(__dirname, 'public', 'index.html');
-  const fs = require('fs');
   
   fs.readFile(indexPath, 'utf8', (err, data) => {
     if (err) {

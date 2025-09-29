@@ -1,5 +1,5 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 class AuthService {
   constructor() {
@@ -58,4 +58,4 @@ class AuthService {
   }
 }
 
-module.exports = new AuthService();
+export default new AuthService();

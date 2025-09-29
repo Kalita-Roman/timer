@@ -100,4 +100,4 @@ class TimerService {
 }
 
 // Export a singleton instance
-module.exports = new TimerService();
+export default new TimerService();
