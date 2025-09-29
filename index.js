@@ -28,6 +28,11 @@ app.use(express.static(path.join(__dirname, 'public'), {
   index: false // Don't serve index.html automatically
 }));
 
+// Health check endpoint for Cloud Run
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
 // Root route - serve the timer management page (protected)
 app.get('/', (req, res) => {
   // Check if user is authenticated
@@ -63,6 +68,11 @@ app.get('/', (req, res) => {
 
 // Auth routes with /auth prefix
 app.use('/auth', authRoutes);
+
+// Health check endpoint for Cloud Run
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
 
 // Timer API routes (protected)
 app.use('/api/timers', ensureAuthenticated, timerRoutes);

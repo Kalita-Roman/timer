@@ -17,15 +17,14 @@ RUN npm ci --only=production && npm cache clean --force
 COPY . .
 
 # Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nestjs -u 1001
+RUN adduser -D -s /bin/sh nodeuser
 
-# Change ownership of the app directory to the nodejs user
-RUN chown -R nestjs:nodejs /app
-USER nestjs
+# Change ownership of the app directory to the nodeuser
+RUN chown -R nodeuser:nodeuser /app
+USER nodeuser
 
-# Expose port dynamically (Cloud Run will provide PORT env var)
-EXPOSE $PORT
+# Expose port 8080 (Cloud Run will provide actual port via PORT env var)
+EXPOSE 8080
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]

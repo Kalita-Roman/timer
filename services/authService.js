@@ -15,6 +15,12 @@ class AuthService {
   }
 
   setupGoogleStrategy() {
+    // Only setup Google strategy if credentials are provided
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+      console.warn('Google OAuth credentials not found. Authentication will not work.');
+      return;
+    }
+    
     const port = process.env.PORT || 3030;
     
     passport.use(new GoogleStrategy({
