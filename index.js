@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const authService = require('./services/authService');
 const routes = require('./routes/index');
+const timerRoutes = require('./routes/timers');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,6 +21,17 @@ authService.initializePassport(app);
 
 // Use routes
 app.use('/', routes);
+
+// Middleware
+app.use(express.json());
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+// Timer API routes
+app.use('/api/timers', timerRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);

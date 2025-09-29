@@ -1,6 +1,13 @@
 # Timer
 
 A Node.js server with Google OAuth2 authentication built with Express.js and Passport.js.
+A simple Node.js server built with Express.js that provides a REST API for managing timers with in-memory storage.
+
+## Features
+
+- **Hello World endpoint**: Basic root endpoint
+- **Timer CRUD API**: Full Create, Read, Update, Delete operations for timers
+- **In-memory storage**: Timers are stored in memory during application runtime
 
 ## Getting Started
 
